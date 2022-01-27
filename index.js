@@ -1,4 +1,5 @@
 let totalScore = 0;
+
 let wins = 0;
 let loses = 0;
 
