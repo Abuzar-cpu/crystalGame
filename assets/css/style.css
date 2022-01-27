@@ -1,0 +1,45 @@
+#name{
+    background-color: brown;
+    color: #fff;
+    font-size: 2rem;
+    height: 10vh;
+    width: fit-content;
+    padding: 1vh 2vw;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+#rules{
+    background-color: burlywood;
+    max-width: 25vw;
+    padding: 1vh 2vw;
+    color: green;
+}
+
+#user-container{
+    width: 25vw;
+    display: flex;
+    justify-content: space-between;
+}
+
+#goal-score{
+    background-color: greenyellow;
+    width: 12vw;
+}
+
+#win-lose{
+    background-color: blue;
+    width: 12vw;
+    color: #fff;
+}
+
+#crystals{
+    display: flex;
+    justify-content: space-between;
+    width: 25vw;
+}
+
+.total{
+    background-color: rgb(74, 74, 207);
+}
