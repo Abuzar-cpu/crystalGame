@@ -1,56 +1,47 @@
+//@ts-check
+
 let totalScore = 0;
 
-let wins = 0;
-let loses = 0;
+let wins = window.sessionStorage.getItem("wins") == undefined ? 0 : parseInt(window.sessionStorage.getItem("wins"));
+let loses = window.sessionStorage.getItem("loses") == undefined ? 0 : parseInt(window.sessionStorage.getItem("loses"));
+let gameEnded = false;
 
-crystals = $("button");
+$("#wins").text("Wins: " + wins);
+$("#loses").text("Lose: " + loses);
 
-goalScore = Math.ceil(Math.random()*100);
+let crystals = $("button");
+
+let goalScore = Math.ceil(Math.random()*100);
 $("#goal-score").text(goalScore);
 
-powers = [Math.ceil(Math.random()*10), Math.ceil(Math.random()*10), Math.ceil(Math.random()*10), Math.ceil(Math.random()*10)];
+let powers = [Math.ceil(Math.random()*10), Math.ceil(Math.random()*10), Math.ceil(Math.random()*10), Math.ceil(Math.random()*10)];
 
 for (const button of crystals) {
     $(button).attr("data-power", Math.ceil(Math.random()*10));
 }
 
-calcScore = (element) =>
-{
-    let temp = totalScore;
-    totalScore += parseInt($(element).data("power"));
-    if(checkIfGameOver() === 0)
+let calcScore = crystal => {
+    if (gameEnded)
+    {
+        alert("Game has ended. Please restart to play again");
+        return;
+    }
+    totalScore += $(crystal).data("power");
+    if(totalScore < goalScore)
+    {
+    }
+    else if (totalScore == goalScore)
     {
         alert("You won");
-        totalScore = temp;
-        updateScore(goalScore);
-        return;
+        wins++;
+        window.sessionStorage.setItem("wins", wins.toString());
+        gameEnded = true;
     }
-
-    else if(checkIfGameOver() === 1)
-    {
+    else{
         alert("You lost");
-        return;
+        loses++;
+        window.sessionStorage.setItem("loses", loses.toString());
+        gameEnded = true;
     }
-    updateScore(totalScore);
-
-}
-
-updateScore = (score) =>
-{
-    $("#user-score").text(score);
-}
-
-checkIfGameOver = () =>
-{
-    if(totalScore === goalScore)
-    {
-        return 0; // Means User won the game
-    }
-
-    else if(totalScore < goalScore)
-    {
-        return -1; // Means the game should continue
-    }
-
-    return 1; // Means User lost the game
+    $("#user-score").text(totalScore);
 }
